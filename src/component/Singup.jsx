@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
 import { useState } from "react";
-import { baseurl } from "../ulti/url";
+import { sheetName } from "../ulti/url";
+import { addData } from "../ulti/addData";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -19,20 +20,15 @@ export default function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     const { password, confirmPassword, email } = signupData;
-    console.log(password, confirmPassword);
+    console.log(password, confirmPassword, email);
     if (password !== confirmPassword) {
       alert("Mật khẩu không trùng");
     } else {
-      const url = `${baseurl}?post=User&values=${email}-${password}-0`;
-      console.log(url);
-      const status = await fetch(url, {
-        method: "POST",
-      });
-      const res = await status.json();
+      const res = await addData({ name: sheetName.User, values: [email, password] })
       console.log(res);
       if (res.success) {
         alert(res.success);
-        navigate("/home");
+        navigate("/login");
       } else {
         alert(res.error);
       }

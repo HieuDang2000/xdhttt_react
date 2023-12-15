@@ -5,3 +5,4 @@ export const logincheck = async ({ email, password }) => {
   const res = await fetch(url);
   return res.json();
 };
+

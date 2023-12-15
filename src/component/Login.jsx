@@ -13,11 +13,14 @@ export default function Login() {
     e.preventDefault();
     const result = await logincheck(loginData);
     // const result = true
-    if (result) {
+    console.log(result)
+    if (result.success) {
       await localStorage.setItem("isAdmin", result.isAdmin === 1);
       await localStorage.setItem("isLogin", true);
-      alert(result.success);
+      await localStorage.setItem("userid", result.id);
+      alert("Login thành công");
       navigate("/");
+      window.location.reload();
     } else {
       alert(result.error);
     }
