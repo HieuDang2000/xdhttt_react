@@ -5,7 +5,7 @@ import LoadingComponent from "../ulti/loading";
 
 const ProjectCard = ({ project }) => {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
+    <div className="bg-white md:w-1/2 p-4 rounded-lg shadow-md  ">
       <h2 className="text-lg font-semibold mb-2 text-center">
         {project.tenDuAn}
       </h2>
@@ -24,27 +24,19 @@ const ProjectCard = ({ project }) => {
 
 const DeTai = () => {
   const [projects, setProjects] = useState([]);
-  const [quanLyDuAn, setQuanLyDuAn] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const projectsData = await getData(sheetName.Projects);
-      const quanLyDuAnData = await getData(sheetName.QuanLyDuAn);
-
       setProjects(projectsData);
-      setQuanLyDuAn(quanLyDuAnData);
       setLoading(false);
     };
 
     fetchData();
   }, []);
 
-  const idduocDuyet = quanLyDuAn
-    .filter((arg) => arg.duocDuyet)
-    .map((arg) => arg.idDuAn);
-
-  const finalData = projects.filter((arg) => idduocDuyet.includes(arg.idDuAn));
+  const finalData = projects.filter((arg) => arg.duocDuyet === "ok");
 
   return (
     <>
@@ -53,7 +45,7 @@ const DeTai = () => {
       ) : (
         <div className="container mx-auto p-4">
           <h1 className="text-2xl font-bold mb-4">Project Dashboard</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 place-items-center">
             {finalData.map((project) => (
               <ProjectCard key={project.idDuAn} project={project} />
             ))}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getData } from "../ulti/getData";
 import { sheetName } from "../ulti/url";
 import { idUser } from "../ulti/isLogin";
+import LoadingComponent from "../ulti/loading";
 
 const ProjectCard = ({ project }) => {
   return (
@@ -10,8 +11,21 @@ const ProjectCard = ({ project }) => {
         {project.tenDuAn}
       </h2>
       <div className="mb-2">
-        <b className="text-sky-400">Trạng Thái: xxx </b> 
-        <button className="bg-red-400 float-right px-4">Quản lý</button>
+        <b className="text-sky-400">
+          Trạng Thái:
+          {project.duocDuyet != "ok" ? (
+            project.duocDuyet == "no" ? (
+              <span className="text-red-500">Đã bị từ chối</span>
+            ) : (
+              "Đang chờ Duyệt"
+            )
+          ) : (
+            <>
+              <span className="text-green-500">Đã được duyệt</span>
+              <button className="bg-red-400 float-right px-4 text-white">Quản lý</button>
+            </>
+          )}
+        </b>
       </div>
       <p className="text-gray-600 mb-2">
         <b>Khoa: </b>
@@ -28,31 +42,35 @@ const ProjectCard = ({ project }) => {
 
 const UserQuanLy = () => {
   const [duan, setDuan] = useState([]);
-  const [ketqua, setKetqua] = useState([]);
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const duan = await getData(sheetName.Projects);
-      const ketqua = await getData(sheetName.QuanLyDuAn);
       const duancuatoi = duan.filter((e) => e.idLeader == idUser);
       await setDuan(duancuatoi);
-      console.log(duan);
-      console.log(idUser);
+      console.log(duancuatoi);
+      setloading(false);
     };
 
     fetchData();
   }, []);
-  console.log(duan);
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Project Dashboard</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {duan.map((project) => (
-          <ProjectCard key={project.idDuAn} project={project} />
-        ))}
-      </div>
-    </div>
+    <>
+      {loading ? (
+        <LoadingComponent />
+      ) : (
+        <div className="container mx-auto p-4">
+          <h1 className="text-2xl font-bold mb-4">Project Dashboard</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {duan.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
