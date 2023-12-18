@@ -51,7 +51,7 @@ const Usertitle = [
   "Đăng Ký Đề tài",
   "Quản lý đề tài",
   "Hộp thư",
-  "Quản lý Thông tin",
+  "Thông tin tài khoản",
 ];
 
 const Header = () => {

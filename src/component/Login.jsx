@@ -54,10 +54,10 @@ export default function Login() {
               for="email"
               className="block text-sm font-medium text-gray-600"
             >
-              Email
+              Username
             </label>
             <input
-              type="email"
+              type="text"
               id="email"
               name="email"
               className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"

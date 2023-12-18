@@ -3,8 +3,18 @@ import { getData } from "../ulti/getData";
 import { sheetName } from "../ulti/nameVariable";
 import { idUser } from "../ulti/isLogin";
 import LoadingComponent from "../ulti/loading";
+import { useNavigate } from "react-router-dom";
 
 const ProjectCard = ({ project }) => {
+  const navigate = useNavigate()
+  const handleEdit = () => {
+    console.log('first')
+     navigate('/user/dangky', {
+      state: {
+        project
+      },
+    })
+  }
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <h2 className="text-lg font-semibold mb-2 text-center">
@@ -17,12 +27,21 @@ const ProjectCard = ({ project }) => {
             project.duocDuyet == "no" ? (
               <span className="text-red-500">Đã bị từ chối</span>
             ) : (
-              "Đang chờ Duyệt"
+              <>
+                "Đang chờ Duyệt"
+                <button
+                onClick={()=>handleEdit()}
+                className="bg-red-400 float-right px-4 text-white">
+                  Sửa thông tin
+                </button>
+              </>
             )
           ) : (
             <>
               <span className="text-green-500">Đã được duyệt</span>
-              <button className="bg-red-400 float-right px-4 text-white">Quản lý</button>
+              <button className="bg-red-400 float-right px-4 text-white">
+                Quản lý Dự Án
+              </button>
             </>
           )}
         </b>

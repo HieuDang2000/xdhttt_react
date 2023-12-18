@@ -7,13 +7,13 @@ import { useNavigate } from "react-router-dom";
 import LoadingComponent from "../ulti/loading";
 const UserDangky = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({
     tenDuAn: "",
     khoa: "",
     capQuanLy: "",
     loaiHinhNghienCuu: "",
   });
-  const [loading, setloading] = useState(false);
+    const [loading, setloading] = useState(false);
   const departments = [
     "Khoa Lý luận chính trị, Luật và Quản lý nhà nước.",
     "Khoa Khoa học tự nhiên.",
@@ -49,9 +49,9 @@ const UserDangky = () => {
     }
     const idLeader = idUser;
     await addData({
-      name: sheetName.Projects,
-      values: [tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu, idLeader],
-    });
+          name: sheetName.Projects,
+          values: [tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu, idLeader],
+        });
     setloading(false);
     console.log(loading);
     alert("Đăng ký mới thành công");
