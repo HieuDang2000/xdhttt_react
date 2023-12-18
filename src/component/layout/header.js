@@ -37,12 +37,21 @@ const basictitle = ["Giới Thiệu", "Top Đề Tài", "Login"];
 const Adminlink = ["/", "/detai", "/admin/quanly"];
 const Admintitle = ["Trang chủ", "Top Đề tài", "Quản Lý Xét Duyệt"];
 
-const Userlink = ["/", "/detai", "/user/dangky", "/user/quanly"];
+const Userlink = [
+  "/",
+  "/detai",
+  "/user/dangky",
+  "/user/quanly",
+  "/user/hopthu",
+  "/user/thongtin"
+];
 const Usertitle = [
   "Trang chủ",
   "Top Đề tài",
   "Đăng Ký Đề tài",
   "Quản lý đề tài",
+  "Hộp thư",
+  "Quản lý Thông tin",
 ];
 
 const Header = () => {

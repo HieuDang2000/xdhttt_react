@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getData } from "../ulti/getData";
-import { sheetName } from "../ulti/url";
+import { sheetName } from "../ulti/nameVariable";
 import { idUser } from "../ulti/isLogin";
 import LoadingComponent from "../ulti/loading";
 

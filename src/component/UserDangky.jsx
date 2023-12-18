@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Dropdown from "../ulti/dropdown";
 import { addData } from "../ulti/addData";
-import { sheetName } from "../ulti/url";
+import { sheetName } from "../ulti/nameVariable";
 import { idUser } from "../ulti/isLogin";
 import { useNavigate } from "react-router-dom";
 import LoadingComponent from "../ulti/loading";

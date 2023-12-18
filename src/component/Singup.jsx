@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import { useState } from "react";
-import { sheetName } from "../ulti/url";
+import { sheetName } from "../ulti/nameVariable";
 import { addData } from "../ulti/addData";
 
 export default function Signup() {
