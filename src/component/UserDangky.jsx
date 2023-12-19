@@ -3,15 +3,17 @@ import Dropdown from "../ulti/dropdown";
 import { addData } from "../ulti/addData";
 import { sheetName } from "../ulti/nameVariable";
 import { idUser } from "../ulti/isLogin";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import LoadingComponent from "../ulti/loading";
 const UserDangky = () => {
   const navigate = useNavigate();
+  const location = useLocation();
     const [formData, setFormData] = useState({
     tenDuAn: "",
     khoa: "",
     capQuanLy: "",
     loaiHinhNghienCuu: "",
+    thanhVien: "",
   });
     const [loading, setloading] = useState(false);
   const departments = [
@@ -24,6 +26,14 @@ const UserDangky = () => {
     "Khoa Giáo dục Thể chất, Quốc phòng.",
     "Khoa Sư phạm.",
   ];
+
+  useEffect(() => {
+    console.log(location.state.project)
+    if (location.state.project) {
+      const {id, tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu, idLeader,thanhVien} = location.state.project
+      setFormData({tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu, thanhVien})
+    }
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,15 +52,20 @@ const UserDangky = () => {
     setloading(true);
     console.log(loading)
     console.log("Form data submitted:", formData);
-    const { tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu } = formData;
-    if (!(tenDuAn && khoa && capQuanLy && loaiHinhNghienCuu)) {
+    const { tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu, thanhVien } = formData;
+    if (!(tenDuAn && khoa && capQuanLy && loaiHinhNghienCuu && thanhVien)) {
       alert("Vui lòng điền đủ thông tin");
       return;
     }
     const idLeader = idUser;
-    await addData({
+    if (location.state.project) await addData({
+      name: 'EditP',
+      values: [tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu, idLeader, thanhVien],
+      id: location.state.project.id,
+    })
+    else await addData({
           name: sheetName.Projects,
-          values: [tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu, idLeader],
+          values: [tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu, idLeader, thanhVien],
         });
     setloading(false);
     console.log(loading);
@@ -77,6 +92,22 @@ const UserDangky = () => {
                 id="tenDuAn"
                 name="tenDuAn"
                 value={formData.tenDuAn}
+                onChange={handleChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="tenDuAn"
+              >
+                Thành viên
+              </label>
+              <input
+                type="text"
+                id="thanhVien"
+                name="thanhVien"
+                value={formData.thanhVien}
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />

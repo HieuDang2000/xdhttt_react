@@ -9,6 +9,7 @@ import {
   AdminQuanly,
   QuanLythongtin,
   Hopthu,
+  ThemTask
 } from "./component";
 import { App } from "./App";
 import { Header, Footer } from "./component/layout";
@@ -30,6 +31,7 @@ export default function AppRoutes() {
             <Route path="/user/quanly" element={<UserQuanLy />} />
             <Route path="/user/thongtin" element={<QuanLythongtin />} />
             <Route path="/user/hopthu" element={<Hopthu />} />
+            <Route path="/user/themtask" element={<ThemTask />} />
             <Route path="/admin/*" element={<Navigate to="/" />} />
           </>
         ) : (

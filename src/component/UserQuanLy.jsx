@@ -15,6 +15,14 @@ const ProjectCard = ({ project }) => {
       },
     })
   }
+  const handleQuanly = () => {
+    console.log('first')
+     navigate('/user/themtask', {
+      state: {
+        project
+      },
+    })
+  }
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <h2 className="text-lg font-semibold mb-2 text-center">
@@ -39,7 +47,9 @@ const ProjectCard = ({ project }) => {
           ) : (
             <>
               <span className="text-green-500">Đã được duyệt</span>
-              <button className="bg-red-400 float-right px-4 text-white">
+              <button
+              onClick={()=>handleQuanly()}
+               className="bg-green-500 float-right px-4 text-white">
                 Quản lý Dự Án
               </button>
             </>
@@ -54,7 +64,7 @@ const ProjectCard = ({ project }) => {
       <p className="text-gray-600 mb-2">
         <b>Loại Hình Nghiên Cứu: </b> {project.loaiHinhNghienCuu}
       </p>
-      <b>Thành viên:</b>
+      <b>Thành viên:</b> {project.thanhVien}
     </div>
   );
 };

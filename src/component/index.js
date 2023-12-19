@@ -7,4 +7,5 @@ import UserDangky from "./UserDangky";
 import UserQuanLy from "./UserQuanLy";
 import QuanLythongtin from "./QuanLythongtin";
 import Hopthu from "./Hopthu";
-export { Login, GioiThieu, DeTai, Signup, AdminQuanly, UserDangky, UserQuanLy, QuanLythongtin, Hopthu };
+import ThemTask from "./ThemTask";
+export { Login, GioiThieu, DeTai, Signup, AdminQuanly, UserDangky, UserQuanLy, QuanLythongtin, Hopthu, ThemTask };
