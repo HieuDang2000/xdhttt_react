@@ -34,8 +34,8 @@ const PrototypeHeader = (link, title) => {
 const basiclink = ["/", "/detai", "/login"];
 const basictitle = ["Giới Thiệu", "Top Đề Tài", "Login"];
 
-const Adminlink = ["/", "/detai", "/admin/quanly"];
-const Admintitle = ["Trang chủ", "Top Đề tài", "Quản Lý Xét Duyệt"];
+const Adminlink = ["/", "/detai", "/admin/quanly", "/admin/chamdiem"];
+const Admintitle = ["Trang chủ", "Top Đề tài", "Quản Lý Xét Duyệt", "Chấm điểm"];
 
 const Userlink = [
   "/",

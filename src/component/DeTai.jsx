@@ -29,7 +29,12 @@ const DeTai = () => {
   useEffect(() => {
     const fetchData = async () => {
       const projectsData = await getData(sheetName.Projects);
-      setProjects(projectsData);
+      const sortedProjects = projectsData.sort(
+        (a, b) => b.chamDiem - a.chamDiem
+      );
+      const top5Projects = sortedProjects.slice(0, 5);
+      console.log(top5Projects);
+      setProjects(top5Projects);
       setLoading(false);
     };
 
@@ -46,8 +51,11 @@ const DeTai = () => {
         <div className="container mx-auto p-4">
           <h1 className="text-2xl font-bold mb-4">Project Dashboard</h1>
           <div className="grid grid-cols-1 gap-4 place-items-center">
-            {finalData.map((project) => (
-              <ProjectCard key={project.idDuAn} project={project} />
+            {finalData.map((project, id) => (
+              <>
+                {`Top: ${id+1}- Điểm: ${project.chamDiem}`}
+                <ProjectCard key={project.idDuAn} project={project} />
+              </>
             ))}
           </div>
         </div>

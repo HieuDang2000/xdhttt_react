@@ -1,28 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { getData } from "../ulti/getData";
-import { sheetName } from "../ulti/nameVariable";
-import { idUser } from "../ulti/isLogin";
+import { ProjAction, sheetName } from "../ulti/nameVariable";
+import { idUser, isAdmin } from "../ulti/isLogin";
 import LoadingComponent from "../ulti/loading";
 import { useNavigate } from "react-router-dom";
+import { addData } from "../ulti/addData";
 
-const ProjectCard = ({ project }) => {
-  const navigate = useNavigate()
+export const ProjectCard = ({ project }) => {
+  const navigate = useNavigate();
+  const [diem, setdiem] = useState(0);
   const handleEdit = () => {
-    console.log('first')
-     navigate('/user/dangky', {
+    console.log("first");
+    navigate("/user/dangky", {
       state: {
-        project
+        project,
       },
-    })
-  }
+    });
+  };
   const handleQuanly = () => {
-    console.log('first')
-     navigate('/user/themtask', {
+    console.log("first");
+    navigate("/user/themtask", {
       state: {
-        project
+        project,
       },
-    })
-  }
+    });
+  };
+  const chamdiem = () => {
+    if (diem > 100 || diem < 1) {
+      alert("Nhập điểm trong khoảng từ 1-100");
+      return;
+    }
+    addData({ name: ProjAction.SubmitP, values: [diem, diem], id: project.id });
+  };
+  const handlediemchange = (e) => {
+    console.log(diem);
+    setdiem(e.target.value);
+  };
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
       <h2 className="text-lg font-semibold mb-2 text-center">
@@ -30,7 +43,7 @@ const ProjectCard = ({ project }) => {
       </h2>
       <div className="mb-2">
         <b className="text-sky-400">
-          Trạng Thái:
+          {isAdmin ? "Trạng Thái: Hoàn Thành" : "Trạng Thái:"}
           {project.duocDuyet != "ok" ? (
             project.duocDuyet == "no" ? (
               <span className="text-red-500">Đã bị từ chối</span>
@@ -38,21 +51,25 @@ const ProjectCard = ({ project }) => {
               <>
                 "Đang chờ Duyệt"
                 <button
-                onClick={()=>handleEdit()}
-                className="bg-red-400 float-right px-4 text-white">
+                  onClick={() => handleEdit()}
+                  className="bg-red-400 float-right px-4 text-white"
+                >
                   Sửa thông tin
                 </button>
               </>
             )
           ) : (
-            <>
-              <span className="text-green-500">Đã được duyệt</span>
-              <button
-              onClick={()=>handleQuanly()}
-               className="bg-green-500 float-right px-4 text-white">
-                Quản lý Dự Án
-              </button>
-            </>
+            !isAdmin && (
+              <>
+                <span className="text-green-500">Đã được duyệt</span>
+                <button
+                  onClick={() => handleQuanly()}
+                  className="bg-green-500 float-right px-4 text-white"
+                >
+                  Quản lý Dự Án
+                </button>
+              </>
+            )
           )}
         </b>
       </div>
@@ -65,6 +82,23 @@ const ProjectCard = ({ project }) => {
         <b>Loại Hình Nghiên Cứu: </b> {project.loaiHinhNghienCuu}
       </p>
       <b>Thành viên:</b> {project.thanhVien}
+      {isAdmin && (
+        <div>
+          <input
+            type="number"
+            onChange={handlediemchange}
+            className="bg-slate-200"
+            min="1"
+            max="100"
+          />
+          <button
+            className="rounded mr-2 bg-green-500"
+            onClick={() => chamdiem(project.id, diem)}
+          >
+            Chấm điểm
+          </button>
+        </div>
+      )}
     </div>
   );
 };
@@ -76,7 +110,11 @@ const UserQuanLy = () => {
   useEffect(() => {
     const fetchData = async () => {
       const duan = await getData(sheetName.Projects);
-      const duancuatoi = duan.filter((e) => e.idLeader == idUser);
+      const duancuatoi = duan
+        .filter((e) => e.idLeader == idUser)
+        .filter((e) => {
+          return e.chamDiem === "";
+        });
       await setDuan(duancuatoi);
       console.log(duancuatoi);
       setloading(false);

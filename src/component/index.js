@@ -8,4 +8,17 @@ import UserQuanLy from "./UserQuanLy";
 import QuanLythongtin from "./QuanLythongtin";
 import Hopthu from "./Hopthu";
 import ThemTask from "./ThemTask";
-export { Login, GioiThieu, DeTai, Signup, AdminQuanly, UserDangky, UserQuanLy, QuanLythongtin, Hopthu, ThemTask };
+import AdminCham from "./AdminCham";
+export {
+  AdminCham,
+  Login,
+  GioiThieu,
+  DeTai,
+  Signup,
+  AdminQuanly,
+  UserDangky,
+  UserQuanLy,
+  QuanLythongtin,
+  Hopthu,
+  ThemTask,
+};

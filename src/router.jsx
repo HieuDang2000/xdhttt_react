@@ -8,8 +8,9 @@ import {
   UserQuanLy,
   AdminQuanly,
   QuanLythongtin,
+  AdminCham,
   Hopthu,
-  ThemTask
+  ThemTask,
 } from "./component";
 import { App } from "./App";
 import { Header, Footer } from "./component/layout";
@@ -39,6 +40,7 @@ export default function AppRoutes() {
           <>
             <Route path="/user/*" element={<Navigate to="/" />} />
             <Route path="/admin/quanly" element={<AdminQuanly />} />
+            <Route path="/admin/chamdiem" element={<AdminCham />} />
           </>
         )}
       </Routes>
