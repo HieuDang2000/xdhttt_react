@@ -17,7 +17,7 @@ const ProjectCard = ({ project }) => {
       <p className="text-gray-600 mb-2">
         <b>Loại Hình Nghiên Cứu: </b> {project.loaiHinhNghienCuu}
       </p>
-      <b>Thành viên:</b>
+      <b>Thành viên:{project.thanhVien}</b>
     </div>
   );
 };

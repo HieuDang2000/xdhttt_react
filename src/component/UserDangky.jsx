@@ -28,10 +28,17 @@ const UserDangky = () => {
   ];
 
   useEffect(() => {
-    console.log(location.state.project)
-    if (location.state.project) {
-      const {id, tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu, idLeader,thanhVien} = location.state.project
-      setFormData({tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu, thanhVien})
+    if (location.state && location.state.project) {
+      const {
+        id,
+        tenDuAn,
+        khoa,
+        capQuanLy,
+        loaiHinhNghienCuu,
+        idLeader,
+        thanhVien,
+      } = location.state.project;
+      setFormData({ tenDuAn, khoa, capQuanLy, loaiHinhNghienCuu, thanhVien });
     }
   }, [])
 
